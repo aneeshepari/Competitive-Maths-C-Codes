@@ -82,38 +82,25 @@ intt is_prime (intt n) {
     return 1;
 }
 /**************************/
-int primes[max7];
+
 int main() {
     boost;
     if(fopen("input.txt", "r")){
       freopen("input.txt", "r", stdin);
       freopen("output.txt", "w", stdout);
     }
-    intt n = 600851475143;
-    // what_is(sqrt(n));
-    memset(primes, 0, sizeof(primes));
-    vi pf;
-    primes[0] = primes[1] = 1;
-    for(int i = 2;(i * i) < max7;i++){
-        if(primes[i] == 0){
-            pf.pb(i);
-            for(int j = i * i;j < max7;j += i)
-                primes[j] = 1;
-        }
+    intt max = 4 * 1e6;
+    int a = 1;
+    int b = 1;
+    intt ans = 0;
+    while(1){
+        int c = a + b;
+        if(c > max)break;
+        if(c % 2 == 0)ans += c;
+        a = b;
+        b = c;
     }
-    int idx = 0;
-    intt mx = 0;
-    // what_is(sqrt(max7));
-    while(idx < SZ(pf)){
-        while(n % pf[idx] == 0){
-            n /= pf[idx];
-            mx = max(mx, pf[idx]);
-        }
-        idx++; 
-    }
-    // what_is(n);
-    mx = max(mx, n);
-    cout << mx << "\n";
+    cout << ans << "\n";
 
     return 0;
 }
