@@ -4,7 +4,7 @@
  */
 
 #include <bits/stdc++.h>
-#include "pretty_print.h"
+//#include "pretty_print.h"
 using namespace std;
 
 /***TEMPLATE***/
@@ -82,68 +82,34 @@ intt is_prime (intt n) {
     return 1;
 }
 /**************************/
-intt val[max7];
-int primes[max7];
+
 int main() {
     boost;
     if(fopen("input.txt", "r")){
       freopen("input.txt", "r", stdin);
       freopen("output.txt", "w", stdout);
     }
-    memset(primes, 0, sizeof(primes));
-    vi pf;
-    primes[0] = primes[1] = 1;
-    for(int i = 2;(i * i) < max7;i++){
-        if(primes[i] == 0){
-            for(int j = i * i;j < max7;j += i)
-                primes[j] = 1;
-        }
-    }
-    for(int i = 0;i < max7;i++)
-    	if(primes[i] == 0)
-    		pf.pb(i);
-
-    map<intt, intt> prev, curr, temp;
-	for(intt i = 2;i < max7;i++){
-		intt n = i;
-		int idx = 0;
-		intt PF = pf[idx];
-	    while(PF * PF < n){
-	        while(n % PF == 0){
-	            n /= PF;
-	            curr[PF]++;
-	        }
-	        idx++; 
-	    	PF = pf[idx];
-	    }
-	    if(n > 1)
-	    	curr[n]++;
-
-	    intt t = 1;
-	    temp.clear();
-	    /*
-		    tn = (n * (n + 1)) / 2
-		    n and n + 1 have no common prime factors...just add prev and curr
-		    prime factors than subtract 1 from temp[2] a (/2).
-	    */
-	    for(auto it : prev){
-	    	temp[it.F] += it.S;
-	    }
-	    for(auto it : curr){
-	    	temp[it.F] += it.S;
-	    }
-	    temp[2]--;
-	    for(auto it : temp){
-	    	t *= (it.S + 1);
-	    }
-	    prev = curr;
-	    curr.clear();
-	    if(t > 500){
-	    	cout << (i * (i - 1)) / 2 << "\n";
-	    	break;
-	    }
+	vector<string> v(100);
+	for(int i = 0;i < 100;i++){
+		cin >> v[i];
 	}
+	vector<intt> sum;
+	intt carry = 0;
+	for(int i = 49;i >= 0;i--){
+		intt t = carry;
+		for(int j = 0;j < 100;j++){
+			t += (v[j][i] - '0');
+		}
+		sum.pb(t % 10);
+		carry = t / 10;
+	}
+	sum.pb(carry);
+	reverse(ALL(sum));
+	int ans = 0;
+	for(int i = 0;i < 9;i++)
+		cout << sum[i];
+
     return 0;
 }
-
 //  Train Insane or Remain the same
+ 

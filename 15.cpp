@@ -2,9 +2,9 @@
  *  newb    
  *  IIIT Allahabad
  */
-
+//Problem 15
 #include <bits/stdc++.h>
-#include "pretty_print.h"
+//#include "pretty_print.h"
 using namespace std;
 
 /***TEMPLATE***/
@@ -82,68 +82,24 @@ intt is_prime (intt n) {
     return 1;
 }
 /**************************/
-intt val[max7];
-int primes[max7];
+
 int main() {
     boost;
     if(fopen("input.txt", "r")){
       freopen("input.txt", "r", stdin);
       freopen("output.txt", "w", stdout);
     }
-    memset(primes, 0, sizeof(primes));
-    vi pf;
-    primes[0] = primes[1] = 1;
-    for(int i = 2;(i * i) < max7;i++){
-        if(primes[i] == 0){
-            for(int j = i * i;j < max7;j += i)
-                primes[j] = 1;
-        }
-    }
-    for(int i = 0;i < max7;i++)
-    	if(primes[i] == 0)
-    		pf.pb(i);
-
-    map<intt, intt> prev, curr, temp;
-	for(intt i = 2;i < max7;i++){
-		intt n = i;
-		int idx = 0;
-		intt PF = pf[idx];
-	    while(PF * PF < n){
-	        while(n % PF == 0){
-	            n /= PF;
-	            curr[PF]++;
-	        }
-	        idx++; 
-	    	PF = pf[idx];
-	    }
-	    if(n > 1)
-	    	curr[n]++;
-
-	    intt t = 1;
-	    temp.clear();
-	    /*
-		    tn = (n * (n + 1)) / 2
-		    n and n + 1 have no common prime factors...just add prev and curr
-		    prime factors than subtract 1 from temp[2] a (/2).
-	    */
-	    for(auto it : prev){
-	    	temp[it.F] += it.S;
-	    }
-	    for(auto it : curr){
-	    	temp[it.F] += it.S;
-	    }
-	    temp[2]--;
-	    for(auto it : temp){
-	    	t *= (it.S + 1);
-	    }
-	    prev = curr;
-	    curr.clear();
-	    if(t > 500){
-	    	cout << (i * (i - 1)) / 2 << "\n";
-	    	break;
-	    }
+	intt dp[21][21];
+	memset(dp, 0LL, sizeof(dp));
+	dp[0][0] = 1;
+	for(int i = 0;i < 21;i++){
+		for(int j = 0;j < 21;j++){
+			if(i > 0)dp[i][j] += dp[i - 1][j];
+			if(j > 0)dp[i][j] += dp[i][j - 1];
+		}
 	}
+	what_is(dp[20][20]);
+
     return 0;
 }
-
 //  Train Insane or Remain the same
